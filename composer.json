@@ -1,5 +1,5 @@
 {
-    "name": "zaeder/jsLogger-bundle",
+    "name": "zaeder/js-logger-bundle",
     "type": "symfony-bundle",
     "description": "Symfony bundle : javascript events logger",    
     "homepage": "http://zaeder.github.io/",
