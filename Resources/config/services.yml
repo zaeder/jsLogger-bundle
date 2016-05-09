@@ -1,0 +1,11 @@
+services:
+    zaeder_js_logger.logger:
+        class: Zaeder\JsLoggerBundle\Logger\Logger
+        arguments: [@logger, %zaeder_js_logger.allowed_levels%, %zaeder_js_logger.ignore_messages%, %zaeder_js_logger.ignore_url_prefixes%]
+    
+    zaeder_js_logger.twig_extension:
+        class: Zaeder\JsLoggerBundle\TwigExtension
+        arguments: [@router]
+        #arguments: [@router, @templating.helper.assets]
+        tag:
+            - { name: twig.extension }

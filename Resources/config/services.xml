@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="zaeder_js_logger.logger.class">Zaeder\JsLoggerBundle\Logger\Logger</parameter>
+        <parameter key="zaeder_js_logger.twig_extension.class">Zaeder\JsLoggerBundle\Twig\TwigExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="zaeder_js_logger.logger" class="%zaeder_js_logger.logger.class%">
+            <argument type="service" id="logger" />
+            <argument>%zaeder_js_logger.allowed_levels%</argument>
+            <argument>%zaeder_js_logger.ignore_messages%</argument>
+            <argument>%zaeder_js_logger.ignore_url_prefixes%</argument>
+            <tag name="monolog.logger" channel="%zaeder_js_logger.monolog_channel%" />
+        </service>
+
+        <service id="zaeder_js_logger.twig_extension" class="%zaeder_js_logger.twig_extension.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="zaeder_js_logger.logger" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

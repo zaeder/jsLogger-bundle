@@ -1,0 +1,19 @@
+(function () {
+    var oldErrorHandler = window.onerror;
+
+    window.onerror = function(errorMsg, file, line, col, errorObj) {
+        if (oldErrorHandler) {
+            oldErrorHandler(errorMsg, file, line);
+        }
+        
+        var contextData = {
+            file: file,
+            line: line,
+            browser: navigator.userAgent,
+            page: document.location.href,
+            stack: errorObj.stack
+        };
+
+        jsLogger('error', errorMsg, contextData);
+    };
+})();

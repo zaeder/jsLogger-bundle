@@ -1,0 +1,53 @@
+var newConsole = {
+    getConsole: function(){
+        if(typeof(this.oldConsole) === 'undefined'){
+            this.oldConsole = console;
+        }
+        customConsole = {};
+        var addProperty = function(customConsole, oldConsole, property){
+            if (typeof(oldConsole[property]) !== 'undefined') {
+                if({{ autologMethods | raw }}.indexOf(property) !== -1){
+                    customConsole[property] = function(){
+                        launchOriginalMethod(oldConsole, property, arguments);
+                        
+                        var contextData = {
+                            browser: navigator.userAgent,
+                            page: document.location.href
+                        }, 
+                        level = (property === 'warn')? 'warning' : property,
+                        message = '';
+                        for(loop = 0, len = arguments.length; loop < len; loop++){
+                            if(loop > 0){
+                                message += ' ';
+                            }
+                            message += arguments[loop];
+                        }
+                        if(message !== ''){
+                            jsLogger(level, message, contextData);
+                        }
+                    };
+                } else {
+                    if(typeof(oldConsole[property]) === 'function'){
+                        customConsole[property] = function(){
+                            launchOriginalMethod(oldConsole, property, arguments);
+                        };
+                    } else {
+                        customConsole[property] = oldConsole[property];
+                    }
+                }
+            }
+            return customConsole;
+        }, 
+        launchOriginalMethod = function(oldConsole, property, arguments){
+            if(oldConsole){
+                oldConsole[property].apply(oldConsole, arguments);
+            }
+        };
+        for (property in this.oldConsole) {
+            customConsole = addProperty(customConsole, this.oldConsole, property);
+        }
+        return customConsole;
+    }
+}
+
+window.console = newConsole.getConsole();

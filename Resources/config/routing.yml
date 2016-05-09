@@ -1,0 +1,19 @@
+zaeder_js_logger_log:
+    path:     /log
+    defaults: { _controller: ZaederJsLoggerBundle:Log:insert }
+    
+zaeder_js_logger_script_listeners_error:
+    path:     /scripts/listeners/error.{_format}
+    defaults: { _controller: ZaederJsLoggerBundle:Js:errorListenerScript }
+    requirements:
+        _format: js
+zaeder_js_logger_script_console:
+    path:     /scripts/console.{_format}
+    defaults: { _controller: ZaederJsLoggerBundle:Js:consoleScript }
+    requirements:
+        _format: js
+zaeder_js_logger_script_logger:
+    path:     /scripts/logger.{_format}
+    defaults: { _controller: ZaederJsLoggerBundle:Js:loggerScript }
+    requirements:
+        _format: js
