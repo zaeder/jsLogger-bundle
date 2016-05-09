@@ -1,0 +1,22 @@
+{
+    "name": "zaeder/jsLogger-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony bundle : javascript events logger",    
+    "homepage": "http://zaeder.github.io/",
+    "license" : "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Florian THIERRY",
+            "email": "zaeder@live.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.3",
+        "symfony/framework-bundle": "~2.3"
+    },    
+    "autoload": {
+        "psr-0": { "Zaeder\\JsLoggerBundle": "" }
+    },
+    "target-dir": "Zaeder/JsLoggerBundle"
+}
